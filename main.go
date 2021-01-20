@@ -1,4 +1,4 @@
-package main
+package encrypter
 
 import (
 	"crypto/aes"
@@ -18,7 +18,6 @@ type Encrypt struct {
 // MakeEncrypt The key should be 16 bytes (AES-128), 24 bytes (AES-192) or
 // 32 bytes (AES-256)
 func MakeEncrypt(key string) Encrypt {
-	key = "Thats my Kung Fu"
 	return Encrypt{[]byte(key)}
 }
 
