@@ -89,7 +89,7 @@ func (e Encrypt) Decrypter(filename string) {
 	//infile, err := os.Open("ciphertext.bin")
 	txtFile, binFile := buildFilenames(filename)
 
-	binFile = binFile + "2"
+	txtFile = txtFile + "2"
 
 	infile, err := os.Open(binFile)
 	if err != nil {
