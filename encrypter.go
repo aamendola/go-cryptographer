@@ -4,7 +4,6 @@ import (
 	"crypto/aes"
 	"crypto/cipher"
 	"crypto/rand"
-	"fmt"
 	"io"
 	"log"
 	"os"
@@ -21,19 +20,21 @@ func MakeEncrypt(key string) Encrypt {
 	return Encrypt{[]byte(key)}
 }
 
+/*
 func buildFilenames(filename string) (string, string) {
 	txtFile := fmt.Sprintf("%v%v", filename, ".pdf")
 	binFile := fmt.Sprintf("%v%v", filename, ".pdf.bin")
 	return txtFile, binFile
 }
+*/
 
 // https://levelup.gitconnected.com/a-short-guide-to-encryption-using-go-da97c928259f
 
 // Encrypter ...
-func (e Encrypt) Encrypter(filename string) {
-	txtFile, binFile := buildFilenames(filename)
+func (e Encrypt) Encrypter(filenameSource, filenameDestination string) {
+	// txtFile, binFile := buildFilenames(filename)
 
-	infile, err := os.Open(txtFile)
+	infile, err := os.Open(filenameSource)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -51,7 +52,7 @@ func (e Encrypt) Encrypter(filename string) {
 		log.Fatal(err)
 	}
 
-	outfile, err := os.OpenFile(binFile, os.O_RDWR|os.O_CREATE, 0777)
+	outfile, err := os.OpenFile(filenameDestination, os.O_RDWR|os.O_CREATE, 0777)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -82,12 +83,11 @@ func (e Encrypt) Encrypter(filename string) {
 }
 
 // Decrypter ...
-func (e Encrypt) Decrypter(filename string) {
-	txtFile, binFile := buildFilenames(filename)
+func (e Encrypt) Decrypter(filenameSource, filenameDestination string) {
+	//txtFile, binFile := buildFilenames(filename)
+	//txtFile = txtFile + ".bin.pdf"
 
-	txtFile = txtFile + ".bin.pdf"
-
-	infile, err := os.Open(binFile)
+	infile, err := os.Open(filenameSource)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -112,7 +112,7 @@ func (e Encrypt) Decrypter(filename string) {
 		log.Fatal(err)
 	}
 
-	outfile, err := os.OpenFile(txtFile, os.O_RDWR|os.O_CREATE, 0777)
+	outfile, err := os.OpenFile(filenameDestination, os.O_RDWR|os.O_CREATE, 0777)
 	if err != nil {
 		log.Fatal(err)
 	}
