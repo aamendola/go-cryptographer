@@ -21,19 +21,16 @@ func MakeEncrypt(key string) Encrypt {
 	return Encrypt{[]byte(key)}
 }
 
-func main() {
-	// https://levelup.gitconnected.com/a-short-guide-to-encryption-using-go-da97c928259f
-}
-
 func buildFilenames(filename string) (string, string) {
-	txtFile := fmt.Sprintf("%s%s", filename, ".txt")
-	binFile := fmt.Sprintf("%s%s", filename, ".bin")
+	txtFile := fmt.Sprintf("%v%v", filename, ".pdf")
+	binFile := fmt.Sprintf("%v%v", filename, ".pdf.bin")
 	return txtFile, binFile
 }
 
+// https://levelup.gitconnected.com/a-short-guide-to-encryption-using-go-da97c928259f
+
 // Encrypter ...
 func (e Encrypt) Encrypter(filename string) {
-	//infile, err := os.Open("plaintext.txt")
 	txtFile, binFile := buildFilenames(filename)
 
 	infile, err := os.Open(txtFile)
@@ -86,10 +83,9 @@ func (e Encrypt) Encrypter(filename string) {
 
 // Decrypter ...
 func (e Encrypt) Decrypter(filename string) {
-	//infile, err := os.Open("ciphertext.bin")
 	txtFile, binFile := buildFilenames(filename)
 
-	txtFile = txtFile + "2"
+	txtFile = txtFile + ".bin.pdf"
 
 	infile, err := os.Open(binFile)
 	if err != nil {
