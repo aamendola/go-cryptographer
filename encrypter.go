@@ -1,4 +1,4 @@
-package main
+package encrypter
 
 import (
 	"crypto/aes"
@@ -8,10 +8,6 @@ import (
 	"log"
 	"os"
 )
-
-func main() {
-	log.Println("Hi! I'm the Encrypter")
-}
 
 // Encrypt ...
 type Encrypt struct {
