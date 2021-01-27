@@ -1,4 +1,4 @@
-package encrypter
+package main
 
 import (
 	"crypto/aes"
@@ -8,6 +8,10 @@ import (
 	"log"
 	"os"
 )
+
+func main() {
+	log.Println("Hi! I'm the Encrypter")
+}
 
 // Encrypt ...
 type Encrypt struct {
@@ -19,14 +23,6 @@ type Encrypt struct {
 func MakeEncrypt(key string) Encrypt {
 	return Encrypt{[]byte(key)}
 }
-
-/*
-func buildFilenames(filename string) (string, string) {
-	txtFile := fmt.Sprintf("%v%v", filename, ".pdf")
-	binFile := fmt.Sprintf("%v%v", filename, ".pdf.bin")
-	return txtFile, binFile
-}
-*/
 
 // https://levelup.gitconnected.com/a-short-guide-to-encryption-using-go-da97c928259f
 
