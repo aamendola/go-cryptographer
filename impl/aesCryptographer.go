@@ -1,4 +1,4 @@
-package encrypter
+package aescryptographer
 
 import (
 	"crypto/aes"
@@ -9,22 +9,23 @@ import (
 	"os"
 )
 
-// Encrypt ...
-type Encrypt struct {
+// https://levelup.gitconnected.com/a-short-guide-to-encryption-using-go-da97c928259f
+
+// AesCryptographer ...
+type AesCryptographer struct {
 	key []byte
 }
 
-// MakeEncrypt The key should be 16 bytes (AES-128), 24 bytes (AES-192) or
+// MakeAesCryptographer The key should be 16 bytes (AES-128), 24 bytes (AES-192) or
 // 32 bytes (AES-256)
-func MakeEncrypt(key string) Encrypt {
-	return Encrypt{[]byte(key)}
+func MakeAesCryptographer(key string) AesCryptographer {
+	return AesCryptographer{
+		key: []byte(key),
+	}
 }
 
-// https://levelup.gitconnected.com/a-short-guide-to-encryption-using-go-da97c928259f
-
-// Encrypter ...
-func (e Encrypt) Encrypter(filenameSource, filenameDestination string) {
-	// txtFile, binFile := buildFilenames(filename)
+// Encrypt ...
+func (e AesCryptographer) Encrypt(filenameSource, filenameDestination string) {
 
 	infile, err := os.Open(filenameSource)
 	if err != nil {
@@ -74,10 +75,8 @@ func (e Encrypt) Encrypter(filenameSource, filenameDestination string) {
 	outfile.Write(iv)
 }
 
-// Decrypter ...
-func (e Encrypt) Decrypter(filenameSource, filenameDestination string) {
-	//txtFile, binFile := buildFilenames(filename)
-	//txtFile = txtFile + ".bin.pdf"
+// Decrypt ...
+func (e AesCryptographer) Decrypt(filenameSource, filenameDestination string) {
 
 	infile, err := os.Open(filenameSource)
 	if err != nil {
