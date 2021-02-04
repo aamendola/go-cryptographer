@@ -1,1 +1,1 @@
-# go-encrypter
+# go-cryptographer
